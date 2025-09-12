@@ -10,7 +10,6 @@ body{
   flex: 1;
 }
 
-
 .navbar{
   height: 5rem;
   background-color: white;
@@ -34,8 +33,6 @@ body{
 
 .f-info-links a:hover{
   text-decoration: underline;
-  
-  
 }
 
 .f-info-links, .f-info-socials, .f-info-brand {
@@ -45,14 +42,10 @@ body{
   justify-content: center;
 }
 
-
-
- .f-info-socials i {
+.f-info-socials i {
   margin-right: 1rem ;
   font-size: 1.2rem;
-
 } 
-
 
 .f-info{
   text-align: center;
@@ -69,7 +62,6 @@ body{
 .card{
   border: none !important;
   margin-bottom: 2rem;
-
 }
 
 .card-img-top{
@@ -94,7 +86,6 @@ body{
 
 .card-img-overlay{
   opacity: 0;
-
 }
 
 .card-img-overlay:hover {
@@ -105,16 +96,13 @@ body{
 .add-btn{
   background-color: rgb(5, 111, 5) !important;
   border: none !important;
-
 }
 
 .edit-btn{
   background-color: rgb(5, 111, 5) !important;
   border: none !important;
   height: 2.35rem !important;
-
 }
-
 
 /* show page */
 
