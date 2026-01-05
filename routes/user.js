@@ -5,36 +5,21 @@ const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
 const { saveRedirectUrl } = require("../middleware");
 
-router.get("/signup", (req, res) => {
-  res.render("users/signup.ejs");
-});
+const userController = require("../controllers/users.js");
 
+//render signup
+router.get("/signup", userController.renderSignupForm);
+
+//signup
 router.post(
   "/signup",
-  wrapAsync(async (req, res, next) => {
-    try {
-      const { username, email, password } = req.body;
-      const newUser = new User({ email, username });
-      const registeredUser = await User.register(newUser, password);
-      console.log("Registered user:", registeredUser);
-      req.login(registeredUser, (err) => {
-        if (err) {
-          return next(err);
-        }
-        req.flash("success", "User was registered successfully!");
-        res.redirect("/listings");
-      });
-    } catch (e) {
-      req.flash("error", e.message);
-      res.redirect("/signup");
-    }
-  })
+  wrapAsync(userController.signup)
 );
 
-router.get("/login", (req, res) => {
-  res.render("users/login.ejs");
-});
+//render login
+router.get("/login", userController.renderLoginForm);
 
+//login
 router.post(
   "/login",
   saveRedirectUrl,
@@ -42,23 +27,10 @@ router.post(
     failureRedirect: "/login",
     failureFlash: true,
   }),
-  (req, res) => {
-    req.flash("success", "Welcome back to FaeTrails!");
-    const redirectUrl = res.locals.redirectUrl || "/listings";
-    delete req.session.redirectUrl;
-    res.redirect(redirectUrl);
-  }
+ userController.login
 );
 
-
-router.get("/logout", (req, res, next) => {
-  req.logout((err) => {
-    if (err) {
-      return next(err);
-    }
-    req.flash("success", "You are logged out!");
-    res.redirect("/listings");
-  });
-});
+//logout
+router.get("/logout",userController.logout);
 
 module.exports = router;
