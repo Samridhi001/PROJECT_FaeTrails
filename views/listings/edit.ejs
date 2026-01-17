@@ -31,10 +31,26 @@
           class="form-control"
           required
         >
-<%= listing.description %></textarea
-        >
+      <%= listing.description %></textarea>
         <div class="invalid-feedback">Please enter a short description</div>
       </div>
+
+      <div class="mb-3">
+  <label class="form-label">Category</label>
+  <select name="listing[categories]" class="form-select" required>
+    <option value="">Select Category</option>
+
+    <option value="trending" <%= listing.categories.includes("trending") ? "selected" : "" %>>Trending</option>
+    <option value="rooms" <%= listing.categories.includes("rooms") ? "selected" : "" %>>Rooms</option>
+    <option value="iconic-cities" <%= listing.categories.includes("iconic-cities") ? "selected" : "" %>>Iconic Cities</option>
+    <option value="mountains" <%= listing.categories.includes("mountains") ? "selected" : "" %>>Mountains</option>
+    <option value="pools" <%= listing.categories.includes("pools") ? "selected" : "" %>>Amazing Pools</option>
+    <option value="camping" <%= listing.categories.includes("camping") ? "selected" : "" %>>Camping</option>
+    <option value="farms" <%= listing.categories.includes("farms") ? "selected" : "" %>>Farms</option>
+    <option value="arctic" <%= listing.categories.includes("arctic") ? "selected" : "" %>>Arctic</option>
+  </select>
+</div>
+
 
       <div class="mb-3">
         Original Listing Image <br/>
