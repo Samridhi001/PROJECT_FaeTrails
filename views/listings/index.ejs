@@ -4,6 +4,7 @@
   #filters {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
   }
 
   .filter{
@@ -26,6 +27,20 @@
 
   .filter p{
      font-size: 0.8rem;
+  }
+
+  #tax-info{
+    display: none;
+  }
+
+  .tax-toggle {
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 3.15rem;
+    padding: 1rem;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
   }
 </style>
    <div id="filters">
@@ -69,6 +84,12 @@
   <p>Arctic</p>
 </a>
 
+<div class="tax-toggle">
+  <div class="form-check-reverse form-switch">
+ <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+ <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+</div>
+</div>
 
 
    </div>
@@ -88,6 +109,7 @@
                 <span class="fw-bold text-success">
                   &#8377; <%= listing.price.toLocaleString("en-IN") %>
                 </span> / night
+                <i class="tax-info">&nbsp;&nbsp;+18% GST</i>
               <% } else { %>
                 <span class="badge bg-danger">Price not available</span>
               <% } %>
@@ -99,6 +121,21 @@
     <% } %>
 
   </div>
+
+  <script>
+  let taxSwitch = document.getElementById("switchCheckDefault");
+
+  taxSwitch.addEventListener("click", () => {
+    let taxInfo = document.getElementsByClassName("tax-info");
+
+    for (let info of taxInfo) {
+      info.style.display =
+        info.style.display === "inline" ? "none" : "inline";
+    }
+  });
+</script>
+
+
 
 </body>
 
