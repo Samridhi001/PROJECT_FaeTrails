@@ -19,7 +19,7 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/FaeTrails";
+const MONGO_URL = process.env.MONGO_URL;
 
 
 main()
@@ -68,10 +68,15 @@ passport.deserializeUser(User.deserializeUser());
 
 
 app.use((req, res, next) => {
+  res.locals.search = req.query.search || "";
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   res.locals.currUser = req.user;
   next();
+});
+
+app.get("/", (req, res) => {
+  res.redirect("/listings");
 });
 
 
@@ -89,6 +94,8 @@ app.use((err, req, res, next) => {
 });
 
 
-app.listen(8080, () => {
-  console.log("server is listening to port 8080");
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, () => {
+  console.log(`server is listening on port ${PORT}`);
 });
